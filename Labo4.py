@@ -1,7 +1,7 @@
 def newPlongeurs():
 	global plongeurs
 	for i in range(3):
-		nPlongeur = input("Veuillez rentrer le nom du plongeur n° " + str(i+1) + " : ")
+		nPlongeur = input("Nom sauteur " + str(i+1) + " : ")
 		plongeurs.append(nPlongeur)
 
 
@@ -10,21 +10,39 @@ def nameSauts():
 	for plongeur in plongeurs:
 		data = []
 		data.append(plongeur)
+		print("Sauteur : " + plongeur)
 		for i in range(2):
 			dataSaut = []
-			saut = input("Veuillez rentrer le saut n° " + str(i+1) + " du plongeur " + plongeur + " : ")
-			coef = input("Veuillez rentrer le coefficient de ce saut : ")
+			saut = input("\tNom saut " + str(i+1) + " : ")
+			coef = float(input("\tCoefficient : "))
 			dataSaut.append(saut)
 			dataSaut.append(coef)
 			data.append(dataSaut)
 		datas.append(data)
 
 
+def listeSauts(nbrSaut):
+	for plongeur in datas:
+		print("\t" + plongeur[0] + " : " + str(plongeur[nbrSaut][0]) + "; " + str(plongeur[nbrSaut][1]))
+
+
+def noteSaut():
+	global datas
+	for plongeur in plongeurs:
+		notesSaut = []
+		print("Sauteur : " + plongeur[0] + " : " + plongeur[nbrSaut][0] + "; " + plongeur[nbrSaut][1])
+		for i in range(5):
+			note = float(input("Points jury " + str(i) + " : "))
+			notesSaut.append(note)
+		datas.append(notesSaut)
+
 
 def main():
 	newPlongeurs()
 	nameSauts()
 	print(datas)
+	listeSauts(1)
+	noteSaut(1)
 	print("En cours de construction...")
 
 
