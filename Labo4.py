@@ -1,3 +1,17 @@
+def triBulle (tab) :
+	t = tab.copy()
+	test=True
+	while test :
+		test = False
+		for i in range(len(t)-1) :
+			if t[i] > t[i+1] :
+				temp = t[i]
+				t[i] = t[i+1]
+				t[i+1] = temp
+				test = True
+	return t
+
+
 def newPlongeurs():
 	global plongeurs
 	for i in range(3):
@@ -38,24 +52,37 @@ def noteSaut(nbrSaut):
 		for i in range(5):
 			note = float(input("Points jury " + str(i + 1) + " : "))
 			notesSaut.append(note)
-			print(datas[j])
-			print(datas[j][i])
-			datas[j][i].append(notesSaut)
-		i += 1
+		datas[j][nbrSaut].append(notesSaut)
+		j += 1
+
+
+def calculPoints(nbrSaut):
+	global datas
+	j = 0
+	for plongeur in datas:
+		subTot = 0
+		points = triBulle(plongeur[nbrSaut][2])[1:-1]
+		for point in points:
+			subTot += point
+			total = subTot * plongeur[nbrSaut][1]
+		datas[j][nbrSaut].append(total)
+		j += 1
+	print(datas)
+
+
 
 
 def main():
 	#newPlongeurs()
 	#nameSauts()
-	datas = [['P', ['p1', 1.0], ['p2', 2.0]], ['M', ['m1', 1.0], ['m2', 2.0]], ['J', ['j1', 1.0], ['j2', 2.0]]]
-	listeSauts(1)
-	noteSaut(1)
-	print("En cours de construction...")
+	#listeSauts(1)
+	#noteSaut(1)
+	#calculPoints(1)
 
 
 #--Variables--
 plongeurs = []
-datas = []
+datas = [['P', ['p1', 1.0, [8.0, 10.0, 3.0, 8.0, 8.0], 24.0], ['p2', 2.0]], ['M', ['m1', 1.0, [9.0, 9.0, 8.9, 9.0, 9.0], 27.0], ['m2', 2.0]], ['J', ['j1', 1.0, [4.0, 3.0, 7.0, 5.0, 3.0], 12.0], ['j2', 2.0]]]
 
 if __name__ == "__main__":
 	main()
